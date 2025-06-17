@@ -186,11 +186,13 @@ class ActivityStartInterceptor {
             return null;
         }
         return TaskFragment.fromTaskFragmentToken(taskFragToken, mService);
+    }
 
     // TODO: consolidate this method with the one below since this is used for test only.
     boolean intercept(Intent intent, ResolveInfo rInfo, ActivityInfo aInfo, String resolvedType,
-            Task inTask, int callingPid, int callingUid, ActivityOptions activityOptions) {
-        return intercept(intent, rInfo, aInfo, resolvedType, inTask, callingPid,
+            Task inTask, TaskFragment inTaskFragment, int callingPid, int callingUid,
+            ActivityOptions activityOptions) {
+        return intercept(intent, rInfo, aInfo, resolvedType, inTask, inTaskFragment, callingPid,
                 callingUid, activityOptions, false);
     }
 
