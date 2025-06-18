@@ -73,13 +73,12 @@ public class PixelPropsUtils {
             "com.google.android.apps.emojiwallpaper",
     };
 
-    // Packages to Spoof as Pixel 7 Pro
+    // Packages to Spoof as Pixel 5
     private static final String[] extraPackagesToChange = {
             "com.android.chrome",
-            "com.breel.wallpapers20",
-            "com.nhs.online.nhsonline",
+            "com.android.vending",
             "com.netflix.mediaclient",
-            "com.nothing.smartcenter"
+            "com.nothing.smartcenter",
     };
 
     // Packages to Keep with original device
@@ -180,8 +179,6 @@ public class PixelPropsUtils {
             "com.pubg.imobile"
     };
 
-    private static volatile boolean sIsGms, sIsFinsky, sIsPhotos;
-
     static {
         propsToKeep = new HashMap<>();
         propsToKeep.put("com.google.android.settings.intelligence", new ArrayList<>(Collections.singletonList("FINGERPRINT")));
@@ -201,7 +198,7 @@ public class PixelPropsUtils {
         propsToChangePixel5.put("DEVICE", "redfin");
         propsToChangePixel5.put("PRODUCT", "redfin");
         propsToChangePixel5.put("MODEL", "Pixel 5");
-        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:13/TQ3A.230901.001/10750268:user/release-keys");
+        propsToChangePixel5.put("FINGERPRINT", "google/redfin/redfin:14/UP1A.231105.001.B2/11260668:user/release-keys");
         propsToChangePixelXL = new HashMap<>();
         propsToChangePixelXL.put("BRAND", "google");
         propsToChangePixelXL.put("MANUFACTURER", "Google");
@@ -241,9 +238,6 @@ public class PixelPropsUtils {
     }
     
     public static boolean setPropsForGms(String packageName) {
-        if (packageName.equals("com.android.vending")) {
-            sIsFinsky = true;
-        }
         if (packageName.equals(PACKAGE_GMS)
                 || packageName.toLowerCase().contains("androidx.test")
                 || packageName.equalsIgnoreCase("com.google.android.apps.restore")) {
@@ -274,18 +268,19 @@ public class PixelPropsUtils {
 
                 dlog("Spoofing build for GMS");
                 // Alter build parameters to avoid hardware attestation enforcement
-                setPropValue("BRAND", "google");
                 setPropValue("MANUFACTURER", "Google");
-                setBuildField("DEVICE", "caiman");
-                setPropValue("ID", "AD1A.240530.047.U1");
-                setBuildField("FINGERPRINT", "google/caiman/caiman:14/AD1A.240530.047.U1/12150698:user/release-keys");
-                setBuildField("MODEL", "Pixel 9 Pro");
-                setBuildField("PRODUCT", "caiman");
-        	setPropValue("TYPE", "user");
-        	setPropValue("TAGS", "release-keys");
-                setVersionFieldString("INCREMENTAL", "12150698");
-		setVersionFieldString("SECURITY_PATCH", "2024-08-05");
-                setVersionFieldInt("DEVICE_INITIAL_SDK_INT", 34);
+                setPropValue("MODEL", "Pixel 9");
+                setPropValue("FINGERPRINT", "google/tokay_beta/tokay:16/BP31.250502.008/13497110:user/release-keys");
+                setPropValue("BRAND", "google");
+                setPropValue("PRODUCT", "tokay_beta");
+                setPropValue("DEVICE", "tokay");
+                setPropValue("VERSION.RELEASE", "16");
+                setPropValue("ID", "BP31.250502.008");
+                setPropValue("VERSION.INCREMENTAL", "13497110");
+                setPropValue("TYPE", "user");
+                setPropValue("TAGS", "release-keys");
+                setPropValue("VERSION.SECURITY_PATCH", "2025-05-05");
+                setPropValue("VERSION.DEVICE_INITIAL_SDK_INT", "21");
                 return true;
             }
         }
